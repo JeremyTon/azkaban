@@ -82,3 +82,39 @@ open -a "Google Chrome" _build/html/index.html
 
 **[July, 2018]** We are actively improving our documentation. Everyone in the AZ community is 
 welcome to submit a pull request to edit/fix the documentation.
+
+
+##KAFKA FLOW TRIGGER
+创建文件夹
+/opt/azkaban/azkaban-web-server-3.91.0/plugins/dependency/kafka
+创建文件
+dependency.properties
+文件内容
+dependency.classpath=/opt/azkaban/azkaban-web-server-3.91.0/plugins/dependency/kafka/kafka-event-trigger-3.91.0-266-g28aa4940-fat.jar
+dependency.class=trigger.kafka.KafkaDependencyCheck
+kafka.broker.url=
+放入jar包
+kafka-event-trigger-3.91.0-266-g28aa4940-fat.jar
+
+azkaban.properties中增加
+proxy.user.lock.down=true
+azkaban.dependency.plugin.dir=/opt/azkaban/azkaban-web-server-3.91.0/plugins/dependency
+azkaban.server.schedule.enable_quartz=true
+azkaban.storage.artifact.max.retention=3
+org.quartz.dataSource.quartzDS.driver=com.mysql.jdbc.Driver
+org.quartz.dataSource.quartzDS.URL=jdbc:mysql://10.xx.xx.xx:3306/azkaban
+org.quartz.dataSource.quartzDS.user=azkaban
+org.quartz.dataSource.quartzDS.password=azkaban
+org.quartz.threadPool.threadCount=3
+org.quartz.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+org.quartz.jobStore.tablePrefix=QRTZ_
+org.quartz.jobStore.dataSource=quartzDS
+
+创建conf/azkaban.private.properties,增加内容
+mysql.user=azkaban
+mysql.password=xx
+org.quartz.dataSource.quartzDS.user=azkaban
+org.quartz.dataSource.quartzDS.password=xx
+
+
