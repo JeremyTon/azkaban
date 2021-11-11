@@ -86,17 +86,25 @@ welcome to submit a pull request to edit/fix the documentation.
 
 ##KAFKA FLOW TRIGGER
 创建文件夹
+```bash
 /opt/azkaban/azkaban-web-server-3.91.0/plugins/dependency/kafka
+```
 创建文件
+```bash
 dependency.properties
+```
 文件内容
+```bash
 dependency.classpath=/opt/azkaban/azkaban-web-server-3.91.0/plugins/dependency/kafka/kafka-event-trigger-3.91.0-266-g28aa4940-fat.jar
 dependency.class=trigger.kafka.KafkaDependencyCheck
 kafka.broker.url=
+```
 放入jar包
+```bash
 kafka-event-trigger-3.91.0-266-g28aa4940-fat.jar
-
+```
 azkaban.properties中增加
+```bash
 proxy.user.lock.down=true
 azkaban.dependency.plugin.dir=/opt/azkaban/azkaban-web-server-3.91.0/plugins/dependency
 azkaban.server.schedule.enable_quartz=true
@@ -110,11 +118,12 @@ org.quartz.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
 org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
 org.quartz.jobStore.tablePrefix=QRTZ_
 org.quartz.jobStore.dataSource=quartzDS
-
+```
 创建conf/azkaban.private.properties,增加内容
+```bash
 mysql.user=azkaban
 mysql.password=xx
 org.quartz.dataSource.quartzDS.user=azkaban
 org.quartz.dataSource.quartzDS.password=xx
-
+```
 
